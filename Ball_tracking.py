@@ -31,3 +31,26 @@ else:
 
 #allow the webcam or video file to warm up
 time.sleep(2.0)
+
+#loop over every frame
+while True:
+    #grab the current frame
+    frame = vs.read()
+    #handle the frame from VideoCapture or VideoStream
+    frame = frame[1] if args.get("video", False) else frame
+
+    # define end statement
+    if frame is None:
+        break
+
+    #resize the frame
+    frame = imutils.resize(frame, width=600)
+    #blur
+    blurred = cv2.GaussianBlur(frame, (11,11), 0)
+    #convert to hsv color space
+    hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+
+    # mask the color and remove any blobs left
+    mask = cv2.inRange(hsv, greenLower, greenUpper)
+    mask = cv2.erode(mask, None, iterations=2)
+    mask = cv2.dilate(mask, None, iterations=2)
