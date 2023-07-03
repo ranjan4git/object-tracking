@@ -1,7 +1,10 @@
 from collections import deque
+from imutils.video import VideoStream
 import numpy as np
 import argparse
 import cv2
+import imutils
+import time
 
 #Construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -17,3 +20,14 @@ greenUpper = (64, 255, 255)
 
 # initialize the list of tracked points
 pts = deque(maxlen=args["buffer"])
+
+#if no video path supplied, refer webcam
+if not args.get("video", False):
+    vs = VideoStream(src=0).start()
+
+# otherwise, refer the video file (obviously)
+else:
+    vs = cv2.VideoCapture(args["video"])
+
+#allow the webcam or video file to warm up
+time.sleep(2.0)
