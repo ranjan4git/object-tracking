@@ -90,6 +90,8 @@ while True:
 
     #show the frame to our screen
     cv2.imshow("Frame", frame)
+    #show the mask (optional) to the screen
+    cv2.imshow("Mask", mask)
     key = cv2.waitKey(1) & 0xFF
 
     #break look if 'q' is pressed
