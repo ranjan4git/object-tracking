@@ -3,10 +3,6 @@ My self-project for detecting and tracking objects using OpenCV
 
 Running the code:
 
->$ python object_tracking.py --video test_video.mp4
-
-or
-
 >$ python object_tracking.py
 
 ### Importing the packages
